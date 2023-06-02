@@ -38,12 +38,12 @@ class Database:
             
             return True
 
-        except mysql.connector.Error as error:
-            print(f'Error while connecting to {self._database} database: {error}')
+        except Exception as error:
+            print(f'Error while connecting to {self._database} database: {str(error)}')
 
         return False
 
-    def disconnect(self) -> bool:
+    def disconnect(self):
         '''
             Disconnects from the MySQL database.
         '''
@@ -51,7 +51,3 @@ class Database:
             self._cursor.close()
             self._db.close()
             print(f'Successfully disconnected from {self._database} database.')
-
-            return True
-    
-        return False
