@@ -43,7 +43,7 @@ class Database:
 
         return False
 
-    def disconnect(self):
+    def disconnect(self) -> bool:
         '''
             Disconnects from the MySQL database.
         '''
@@ -51,3 +51,7 @@ class Database:
             self._cursor.close()
             self._db.close()
             print(f'Successfully disconnected from {self._database} database.')
+
+            return True
+    
+        return False
