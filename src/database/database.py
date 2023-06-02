@@ -21,7 +21,7 @@ class Database:
         self._password = password
         self._database = database
 
-    def connect(self):
+    def connect(self) -> bool:
         '''
             Establishes a connection to the MySQL database.
         '''
@@ -35,9 +35,13 @@ class Database:
             )
             self._cursor = self._db.cursor()
             print(f'Successfully connected to {self._database} database.')
+            
+            return True
 
         except mysql.connector.Error as error:
             print(f'Error while connecting to {self._database} database: {error}')
+
+        return False
 
     def disconnect(self):
         '''
