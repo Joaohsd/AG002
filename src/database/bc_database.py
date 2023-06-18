@@ -38,7 +38,7 @@ class BreastCancerDB:
             
         return []
     
-    def selectColumnNames(self) -> List[Tuple]:
+    def selectColumnNames(self) -> List:
         '''
             Executes a SELECT query on the 'breast-cancer' table and retrieves all rows.
 
@@ -53,13 +53,16 @@ class BreastCancerDB:
             try:
                 self.__db._cursor.execute(query)
                 results = self.__db._cursor.fetchall()
-                
+                names = []
+
                 if len(results) > 0:
                     print('Select query executed successfully. Results found.')
+                    for result in results:
+                        names.append(result[0])
                 else:
                     print('Select query executed successfully. No results found.')
                 
-                return results
+                return names
             except Exception as error:
                 print(f'Error executing select query: {str(error)}')
             finally:

@@ -26,14 +26,14 @@ class Database:
             Establishes a connection to the MySQL database.
         '''
         try:
-            self._db = mysql.connector.connect(
+            self.__db = mysql.connector.connect(
                 host=self._host,
                 port=self._port,
                 database=self._database,
                 user=self._user,
                 password=self._password
             )
-            self._cursor = self._db.cursor()
+            self._cursor = self.__db.cursor()
             print(f'Successfully connected to {self._database} database.')
             
             return True
@@ -47,7 +47,7 @@ class Database:
         '''
             Disconnects from the MySQL database.
         '''
-        if self._db:
+        if self.__db:
             self._cursor.close()
-            self._db.close()
+            self.__db.close()
             print(f'Successfully disconnected from {self._database} database.')
