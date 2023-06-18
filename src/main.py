@@ -18,7 +18,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 
 def perceptron(X_train, X_test, y_train, y_test):
     # Perceptron
-    perceptron = Perceptron(alpha=0.05, n_epochs=10000)
+    perceptron = Perceptron(alpha=0.01, n_epochs=1000)
     perceptron.train(X_train, y_train)
     predictedPerceptron = perceptron.test(X_test)
     print(f'Accuracy score for Perceptron: {accuracy_score(y_test, predictedPerceptron)}')
@@ -32,7 +32,7 @@ def perceptron(X_train, X_test, y_train, y_test):
 
 def adaline(X_train, X_test, y_train, y_test):
     # Adaline
-    adaline = Adaline(alpha=0.01, n_epochs=10000, max_error=1e-12)
+    adaline = Adaline(alpha=0.01, n_epochs=1000, max_error=1e-12)
     adaline.train(X_train, y_train)
     predictedAdaline = adaline.test(X_test)
     print(f'Accuracy score for Adaline: {accuracy_score(y_test, predictedAdaline)}')
@@ -137,8 +137,11 @@ def main():
     X = df.iloc[:,1:-1].to_numpy()
     y = df.iloc[:,-1].to_numpy()
 
+    # Preprocessing using Oversampling in order to balance Dataset
+    X_resampled, y_resampled = Preprocessing.resampleDataset(X, y)
+
     # Split dataset into train and test parts in order to train and verify model performance
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, shuffle=True)
+    X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.20, shuffle=True)
 
     # Train models and verify performance by accuracy and confusion matrix
     perceptron(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
