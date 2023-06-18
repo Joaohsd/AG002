@@ -1,3 +1,7 @@
 numpy
 pandas
+matplotlib
+scikit-learn
+seaborn
 mysql-connector-python
+mysql-connector
