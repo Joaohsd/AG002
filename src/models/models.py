@@ -10,6 +10,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 from models.neural_networks.perceptron import Perceptron
 from models.neural_networks.adaline import Adaline
+from models.neural_networks.multilayer_perceptron import MLP
 
 from sklearn.metrics import accuracy_score, confusion_matrix
 
@@ -26,10 +27,11 @@ def perceptron(X_train, X_test, y_train, y_test):
     plt.ylabel('Predicted label', fontsize=14)
     plt.savefig('src/models/images/confusion_matrix_perceptron.png', dpi=600)
     plt.close()
+    return perceptron
 
 def adaline(X_train, X_test, y_train, y_test):
     # Adaline
-    adaline = Adaline(alpha=0.001, n_epochs=10000, max_error=1e-12)
+    adaline = Adaline(alpha=0.001, n_epochs=15000, max_error=1e-12)
     adaline.train(X_train, y_train)
     predictedAdaline = adaline.test(X_test)
     print(f'Accuracy score for Adaline: {accuracy_score(y_test, predictedAdaline)}')
@@ -40,6 +42,22 @@ def adaline(X_train, X_test, y_train, y_test):
     plt.ylabel('Predicted label', fontsize=14)
     plt.savefig('src/models/images/confusion_matrix_adaline.png', dpi=600)
     plt.close()
+    return adaline
+
+def multilayerPerceptron(X_train, X_test, y_train, y_test):
+    # Adaline
+    mlp = MLP(alpha=0.01, max_error=1e-7, neurons=[16, 8, 1])
+    mlp.train(X_train, y_train)
+    preditedMLP = mlp.test(X_test)
+    print(f'Accuracy score for MLP: {accuracy_score(y_test, preditedMLP)}')
+    # Plot the confusion matrix.
+    mat = confusion_matrix(y_test, preditedMLP)
+    sns.heatmap(mat.T, square=True, annot=True, fmt='d', cbar=False, xticklabels=['1','2'], yticklabels=['1','2'], cmap="Blues")
+    plt.xlabel('True label', fontsize=14)
+    plt.ylabel('Predicted label', fontsize=14)
+    plt.savefig('src/models/images/confusion_matrix_MLP.png', dpi=600)
+    plt.close()
+    return mlp
 
 def decisionTree(X_train, X_test, y_train, y_test):
     # Decision Tree
@@ -54,6 +72,7 @@ def decisionTree(X_train, X_test, y_train, y_test):
     plt.ylabel('Predicted label', fontsize=14)
     plt.savefig('src/models/images/confusion_matrix_decisionTree.png', dpi=600)
     plt.close()
+    return decisionTree
 
 def randomForest(X_train, X_test, y_train, y_test):
     # Random Forest
@@ -68,6 +87,7 @@ def randomForest(X_train, X_test, y_train, y_test):
     plt.ylabel('Predicted label', fontsize=14)
     plt.savefig('src/models/images/confusion_matrix_randomForest.png', dpi=600)
     plt.close()
+    return randomForest
 
 def knn(X_train, X_test, y_train, y_test):
     # K-Nearest Neighboor
@@ -93,11 +113,11 @@ def knn(X_train, X_test, y_train, y_test):
             k_max = k
     # Train with best k
     # Create an instance of Neighbours Classifier and fit the data.
-    clf = KNeighborsClassifier(k, weights='distance')
+    knn = KNeighborsClassifier(k_max, weights='distance')
     # Train the classifier.
-    clf.fit(X_train, y_train)
+    knn.fit(X_train, y_train)
     # Predict.
-    predictedKnn = clf.predict(X_test)
+    predictedKnn = knn.predict(X_test)
     print(f'Accuracy score for KNN using {k_max} neighboors: {accuracy_score(y_test, predictedKnn)}')
     # Plot the confusion matrix.
     mat = confusion_matrix(y_test, predictedKnn)
@@ -106,3 +126,4 @@ def knn(X_train, X_test, y_train, y_test):
     plt.ylabel('Predicted label', fontsize=14)
     plt.savefig('src/models/images/confusion_matrix_knn.png', dpi=600)
     plt.close()
+    return knn

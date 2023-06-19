@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 from models.models import *
+from cli.menu import MenuCLI
 
 def main():
     print('Succesfully started!')
@@ -44,11 +45,24 @@ def main():
     X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.20, shuffle=True)
 
     # Train models and verify performance by accuracy and confusion matrix
-    perceptron(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
-    adaline(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
-    decisionTree(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
-    randomForest(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
-    knn(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
+    _perceptron = perceptron(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
+    _adaline = adaline(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
+    #multilayerPerceptron(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
+    _decision_tree = decisionTree(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
+    _random_forest = randomForest(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
+    _knn = knn(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
     
+    # Models
+    models = []
+    models.append(_perceptron)
+    models.append(_adaline)
+    models.append(_decision_tree)
+    models.append(_random_forest)
+    models.append(_knn)
+
+    # Menu
+    menu = MenuCLI(models)
+    menu.run()
+
 if __name__ == '__main__':
     main()
