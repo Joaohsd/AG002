@@ -118,3 +118,7 @@ class Validation:
     @staticmethod
     def map_irradiat_in_range(irradiat):
         return 1 if irradiat == 'no' else 2
+    
+    @staticmethod
+    def map_result_in_range(result):
+        return 'no-recurrence-events' if result == 1 else 'recurrence-events'

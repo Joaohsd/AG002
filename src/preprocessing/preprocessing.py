@@ -30,11 +30,11 @@ class Preprocessing:
     
     @staticmethod
     def verifyDatasetBalance(data:pd.DataFrame) -> None:
-        # Countign values
+        # Counting values
         value_counts = data.value_counts()
         # Pie chart
         plt.figure(figsize=(6, 6))
-        plt.pie(value_counts, labels=value_counts.index, autopct='%.2f')
+        plt.pie(value_counts, labels=value_counts.index, autopct='%.2f%%')
         plt.title('Classes Percentage')
         plt.savefig('src/preprocessing/images/PieChart_class.png', dpi=400)
         plt.close()
@@ -47,7 +47,7 @@ class Preprocessing:
         value_counts = pd.Series(y_resampled).value_counts()
         # Pie chart
         plt.figure(figsize=(6, 6))
-        plt.pie(value_counts, labels=value_counts.index, autopct='%.2f')
+        plt.pie(value_counts, labels=value_counts.index, autopct='%.2f%%')
         plt.title('Classes Percentage')
         plt.savefig('src/preprocessing/images/PieChart_class_new.png', dpi=400)
         plt.close()

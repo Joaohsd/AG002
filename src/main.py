@@ -47,7 +47,7 @@ def main():
     # Train models and verify performance by accuracy and confusion matrix
     _perceptron = perceptron(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
     _adaline = adaline(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
-    #multilayerPerceptron(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
+    #_multilayerPerceptron(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
     _decision_tree = decisionTree(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
     _random_forest = randomForest(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())
     _knn = knn(X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy())

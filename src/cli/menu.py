@@ -1,5 +1,6 @@
 from cli.validation import Validation
 import numpy as np
+
 class MenuCLI:
     def __init__(self, models):
         self.__options = range(7)
@@ -16,6 +17,9 @@ class MenuCLI:
         print('6 - Exit')
     
     def run(self):
+        '''
+            Main method of menu
+        '''
         while True:
             self.__showHeader()
             try:
@@ -25,13 +29,17 @@ class MenuCLI:
                 elif option == max(self.__options):
                     break
                 inputs = self.__features_input(option)
-                print(inputs)
+                print('Selected model {self.__models[option - 1]}')
                 result = self.__models[option - 1].predict(inputs)
-                print(f'Result for {inputs} was: {result}')
+                print(f'Result for {inputs} was: {Validation.map_result_in_range(result)}')
             except:
                 print('Enter with the correct option!')  
-    
+        print('Bye')
+
     def __features_input(self, option) -> list:
+        '''
+            Get entry values in order to estimate Recurence or not recurence for the selected model 
+        '''
         age = Validation.map_age_in_range(int(input('Type age: ')))
         meno_pause = Validation.map_menopause_in_range(str(input('Menopause (lt40 , ge40 ou premeno): ')))
         tumor_size = Validation.map_tumorsize_in_range(int(input('Tumor size in mmm: ')))

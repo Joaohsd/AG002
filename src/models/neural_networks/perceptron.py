@@ -44,7 +44,7 @@ class Perceptron:
 
     def test(self, x):
         ''' 
-            Dado uma lista de x, submete-os à rede
+            List of x and submit them to the neural network
         '''
         bias = np.ones(x.shape[0]).reshape(-1,1)
         X = np.concatenate((bias, x), axis=1)

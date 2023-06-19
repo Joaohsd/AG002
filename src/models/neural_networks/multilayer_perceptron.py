@@ -89,7 +89,9 @@ class MLP():
         
         
     def test(self, x):
-        ''' Dado uma lista de X, submete-os à rede'''
+        ''' 
+            List of x and submit them to the neural network
+        '''
         results = []
         for xi in x:
             input_value = np.insert(xi, 0, self.bias)

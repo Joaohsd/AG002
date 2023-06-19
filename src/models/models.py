@@ -45,7 +45,7 @@ def adaline(X_train, X_test, y_train, y_test):
     return adaline
 
 def multilayerPerceptron(X_train, X_test, y_train, y_test):
-    # Adaline
+    # Multilayer Perceptron
     mlp = MLP(alpha=0.01, max_error=1e-7, neurons=[16, 8, 1])
     mlp.train(X_train, y_train)
     preditedMLP = mlp.test(X_test)
