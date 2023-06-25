@@ -11,7 +11,7 @@ class Adaline:
         return self.weights.T.dot(x)
     
     def activation_function(self, value):
-        return 2 if value >= 0 else 1
+        return 2 if value >= 1.5 else 1
     
     def predict(self, x):
         input = self.input_function(x)
